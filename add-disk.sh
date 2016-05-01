@@ -38,7 +38,7 @@ if [ $(whoami) = "root" ]; then # If Root
   if [ $Continue = $DiskName ]; then # If Continue
 
     # Mount Disk
-    echo "> Formatting as Ext4 filesystem"
+    echo "> Formatting "$DiskName" as Ext4 filesystem"
     mkfs.ext4 -F -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/disk/by-id/google-$DiskName
     if [ ${MergeDirectory,} = "y" ]; then # Merge Directory
       TempLocation="/mnt/"$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
@@ -47,6 +47,7 @@ if [ $(whoami) = "root" ]; then # If Root
       mount -o discard,defaults /dev/disk/by-id/google-$DiskName $TempLocation
       chmod a+w $TempLocation
       echo "> Merging with "$MountLocation
+      echo "cp "$MountLocation" "$TempLocation
       cp $MountLocation $TempLocation
       rm -rf $MountLocation
       echo "> Mounting to "$MountLocation
@@ -54,7 +55,7 @@ if [ $(whoami) = "root" ]; then # If Root
       mount -o discard,defaults /dev/disk/by-id/google-$DiskName $MountLocation
       chmod a+w $MountLocation
       echo "> Unmouting temporary location"
-      unmount $TempLocation
+      umount $TempLocation
     else
       if [ -d $MountLocation ]; then
         echo "> Removing "$MountLocation
