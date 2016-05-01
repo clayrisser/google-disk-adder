@@ -48,7 +48,7 @@ if [ $(whoami) = "root" ]; then # If Root
       chmod a+w $TempLocation
       echo "> Merging with "$MountLocation
       echo "cp "$MountLocation" "$TempLocation
-      cp -r $MountLocation $TempLocation
+      cp -r $MountLocation/* $TempLocation
       rm -rf $MountLocation
       echo "> Mounting to "$MountLocation
       mkdir $MountLocation
@@ -73,6 +73,9 @@ if [ $(whoami) = "root" ]; then # If Root
       echo "> Adding disk to /etc/fstab for mouting on boot."
       echo "/dev/disk/by-id/google-"$DiskName" "$MountLocation" ext4 discard,defaults 1 1" | tee -a /etc/fstab
     fi
+
+  else #Not Continue
+  echo "The name of the disk did not match the name of the disk you wish to mount."
 
   fi #End Continue
 
