@@ -38,6 +38,8 @@ if [ $(whoami) = "root" ]; then # If Root
   if [ $Continue = $DiskName ]; then # If Continue
 
     # Mount Disk
+    echo
+    echo "> Starting operations"
     echo "> Formatting "$DiskName" as Ext4 filesystem"
     mkfs.ext4 -F -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/disk/by-id/google-$DiskName
     if [ ${MergeDirectory,} = "y" ]; then # Merge Directory
@@ -75,6 +77,7 @@ if [ $(whoami) = "root" ]; then # If Root
     fi
 
   else #Not Continue
+  echo
   echo "The name of the disk did not match the name of the disk you wish to mount."
 
   fi #End Continue
@@ -83,4 +86,5 @@ else #Not Root
 echo "This command must be run as root."
 
 fi #End Root
+echo
 echo "Exiting"
