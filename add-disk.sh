@@ -89,3 +89,4 @@ echo "This command must be run as root."
 fi #End Root
 echo
 echo "Exiting"
+echo
