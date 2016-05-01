@@ -48,7 +48,7 @@ if [ $(whoami) = "root" ]; then # If Root
     # Set as /home
     if [ ${HomeDirectory,} = "y" ]; then
       echo "Copying home directory to disk."
-      cp /home/* $MountLocation
+      cp /home $MountLocation
       echo "Removing current home directory."
       rm -rf /home
       echo "Mounting home directory."
