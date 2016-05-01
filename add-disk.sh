@@ -37,28 +37,31 @@ if [ $(whoami) = "root" ]; then # If Root
 
     # Add Disk
     echo "Formatting as Ext4 filesystem."
-    sudo mkfs.ext4 -F -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/disk/by-id/google-$DiskName
+    mkfs.ext4 -F -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/disk/by-id/google-$DiskName
     echo "Mounting disk."
-    sudo mkdir $MountLocation
-    sudo mount -o discard,defaults /dev/disk/by-id/google-$DiskName $MountLocation
+    mkdir $MountLocation
+    mount -o discard,defaults /dev/disk/by-id/google-$DiskName $MountLocation
     echo "Disk mounted at "$MountLocation
-    sudo chmod a+w $MountLocation
+    chmod a+w $MountLocation
 
     # Set as /home
     if [ ${HomeDirectory,} = "y" ]; then
-      echo "Copying home directory to disk . . ."
+      echo "Copying home directory to disk."
       cp /home/* $MountLocation
-      echo "Removing current home directory . . ."
+      echo "Removing current home directory."
       rm -rf /home
+      echo "Mounting home directory."
+      mkdir /home
+      mount -o discard,defaults /dev/disk/by-id/google-$DiskName /home
     fi
 
     # Add disk to /etc/fstab for mouting on boot
     if [ ${MountOnBoot,} = "y" ]; then 
       echo "Adding disk to /etc/fstab for mouting on boot."
       if [ ${HomeDirectory,} = "y" ]; then
-        echo "/dev/disk/by-id/google-"$DiskName" /home ext4 discard,defaults 1 1" | sudo tee -a /etc/fstab
+        echo "/dev/disk/by-id/google-"$DiskName" /home ext4 discard,defaults 1 1" | tee -a /etc/fstab
       else
-        echo "/dev/disk/by-id/google-"$DiskName" "$MountLocation" ext4 discard,defaults 1 1" | sudo tee -a /etc/fstab
+        echo "/dev/disk/by-id/google-"$DiskName" "$MountLocation" ext4 discard,defaults 1 1" | tee -a /etc/fstab
       fi
     fi
 
