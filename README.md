@@ -2,6 +2,7 @@
 Adds a Google Cloud Disk to a Google Compute Engine.
 
 Example use cases for Google Disk Adder:
+
 1. Create a separate /home partition.
 2. Add additional backup and storage partitions.
 
