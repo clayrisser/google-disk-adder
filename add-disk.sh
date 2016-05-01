@@ -48,7 +48,7 @@ if [ $(whoami) = "root" ]; then # If Root
       chmod a+w $TempLocation
       echo "> Merging with "$MountLocation
       echo "cp "$MountLocation" "$TempLocation
-      cp $MountLocation $TempLocation
+      cp -r $MountLocation $TempLocation
       rm -rf $MountLocation
       echo "> Mounting to "$MountLocation
       mkdir $MountLocation
