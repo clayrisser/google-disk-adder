@@ -37,36 +37,39 @@ if [ $(whoami) = "root" ]; then # If Root
 
   if [ $Continue = $DiskName ]; then # If Continue
 
-    # Add Disk
-    echo "> Formatting as Ext4 filesystem."
+    # Mount Disk
+    echo "> Formatting as Ext4 filesystem"
     mkfs.ext4 -F -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/disk/by-id/google-$DiskName
-    echo "> Mounting disk."
-    mkdir $MountLocation
-    mount -o discard,defaults /dev/disk/by-id/google-$DiskName $MountLocation
-    echo "> Disk mounted at "$MountLocation
-    chmod a+w $MountLocation
-
-    # Set as /home
-    if [ ${HomeDirectory,} = "y" ]; then
-      echo "> Copying home directory to disk."
-      cp /home $MountLocation
-      echo "> Removing current home directory."
-      rm -rf /home
-      echo "> Mounting to /home directory."
-      mkdir /home
-      mount -o discard,defaults /dev/disk/by-id/google-$DiskName /home
-      echo "> Unmounting /mnt/"$MountLocation
-      unmount /mnt/$MountLocation
+    if [ ${MergeDirectory,} = "y" ]; then # Merge Directory
+      TempLocation="/mnt/"$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
+      mkdir $TempLocation
+      echo "> Mounting to temporary location"
+      mount -o discard,defaults /dev/disk/by-id/google-$DiskName $TempLocation
+      chmod a+w $TempLocation
+      echo "> Merging with "$MountLocation
+      cp $MountLocation $TempLocation
+      rm -rf $MountLocation
+      echo "> Mounting to "$MountLocation
+      mkdir $MountLocation
+      mount -o discard,defaults /dev/disk/by-id/google-$DiskName $MountLocation
+      chmod a+w $MountLocation
+      echo "> Unmouting temporary location"
+      unmount $TempLocation
+    else
+      if [ -d $MountLocation ]; then
+        echo "> Removing "$MountLocation
+        rm -rf $MountLocation
+      fi
+      echo "> Mounting to "$MountLocation
+      mkdir $MountLocation
+      mount -o discard,defaults /dev/disk/by-id/google-$DiskName $MountLocation
+      chmod a+w $MountLocation
     fi
 
     # Add disk to /etc/fstab for mouting on boot
     if [ ${MountOnBoot,} = "y" ]; then 
       echo "> Adding disk to /etc/fstab for mouting on boot."
-      if [ ${HomeDirectory,} = "y" ]; then
-        echo "/dev/disk/by-id/google-"$DiskName" /home ext4 discard,defaults 1 1" | tee -a /etc/fstab
-      else
-        echo "/dev/disk/by-id/google-"$DiskName" "$MountLocation" ext4 discard,defaults 1 1" | tee -a /etc/fstab
-      fi
+      echo "/dev/disk/by-id/google-"$DiskName" "$MountLocation" ext4 discard,defaults 1 1" | tee -a /etc/fstab
     fi
 
   fi #End Continue
