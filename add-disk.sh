@@ -83,6 +83,7 @@ if [ $(whoami) = "root" ]; then # If Root
   fi #End Continue
 
 else #Not Root
+echo
 echo "This command must be run as root."
 
 fi #End Root
