@@ -10,7 +10,7 @@ Google Disk Adder allows you to choose any location in your Google Compute Engin
 
 ## Usage
 1. Add a persistent disk to your instance.
-  * Learn how to do that <a href="https://cloud.google.com/compute/docs/disks/add-persistent-disk#create_disk" target"_blank">HERE</a>.
+  * Learn how to do that <a href="https://cloud.google.com/compute/docs/disks/add-persistent-disk#create_disk" target="_blank">HERE</a>.
 2. Run the following commands.
 ```
 cd /tmp
