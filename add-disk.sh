@@ -49,7 +49,7 @@ if [ $(whoami) = "root" ]; then # If Root
       mount -o discard,defaults /dev/disk/by-id/google-$DiskName $TempLocation
       chmod a+w $TempLocation
       echo "> Merging with "$MountLocation
-      cp -r $MountLocation/* $TempLocation
+      cp -rp $MountLocation/* $TempLocation
       rm -rf $MountLocation
       echo "> Mounting to "$MountLocation
       mkdir $MountLocation
