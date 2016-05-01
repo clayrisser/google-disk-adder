@@ -1,7 +1,7 @@
 # Google Disk Adder
 Adds a Google Cloud Disk to a Google Compute Engine.
 
-Example use cases for Google Disk Adder
+Example use cases for Google Disk Adder:
 1. Create a separate /home partition.
 2. Add additional backup and storage partitions.
 
@@ -9,7 +9,7 @@ Google Disk Adder allows you to choose any location in your Google Compute Engin
 
 ## Usage
 1. Add a persistent disk to your instance.
-  * Learn how to do that [HERE](https://cloud.google.com/compute/docs/disks/add-persistent-disk#create_disk).
+  * Learn how to do that <a href="https://cloud.google.com/compute/docs/disks/add-persistent-disk#create_disk" target"_blank">HERE</a>.
 2. Run the following commands.
 ```
 cd /tmp
@@ -30,7 +30,7 @@ A ridiculous amount of coffee was consumed in the process of building this proje
 5. Submit a pull request :D
 
 ## Changelog
-Take a peek at the [CHANGELOG](https://github.com/jamrizzi/pdf-object/blob/master/CHANGELOG.md).
+Take a peek at the [CHANGELOG](https://github.com/jamrizzi/google-disk-adder/blob/master/CHANGELOG.md).
 
 ## License
 [GNU Public License Version 3](https://raw.githubusercontent.com/jamrizzi/google-disk-adder/master/LICENSE)
