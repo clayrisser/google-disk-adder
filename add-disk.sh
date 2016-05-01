@@ -9,7 +9,7 @@ echo "                    |___/                                                 
 echo
 
 # Setup
-echo "Adds a Google Cloud Disk to a Google Compute Engine"
+echo "Adds a Google Cloud Disk to a Google Compute Engine."
 if [ $(whoami) = "root" ]; then # If Root
   echo
   read -p "Enter the name of the disk you would like to add: " DiskName
