@@ -8,3 +8,6 @@ wget https://raw.githubusercontent.com/jamrizzi/google-disk-adder/master/add-dis
 sudo chmod +x add-disk.sh
 sudo ./add-disk.sh
 ```
+
+## License
+[GNU Public License Version 3](raw.githubusercontent.com/jamrizzi/google-disk-adder/master/license.md)
