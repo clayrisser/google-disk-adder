@@ -49,15 +49,18 @@ if [ $(whoami) = "root" ]; then # If Root
       mount -o discard,defaults /dev/disk/by-id/google-$DiskName $TempLocation
       chmod a+w $TempLocation
       echo "> Merging with "$MountLocation
-      cp -rp $MountLocation/* $TempLocation
-      rm -rf $MountLocation
+      mv -rp $MountLocation/* $TempLocation
+      mv -fp $MountLocation /tmp
       echo "> Mounting to "$MountLocation
       mkdir $MountLocation
+      chown --reference=/tmp/$MountLocation $MountLocation
+      chmod --reference=/tmp/$MountLocation $MountLocation
       mount -o discard,defaults /dev/disk/by-id/google-$DiskName $MountLocation
       chmod a+w $MountLocation
       echo "> Unmouting temporary location"
       umount -l $TempLocation
       rm -rf $TempLocation
+      rm -rf /tmp/$MountLocation
     else
       if [ -d $MountLocation ]; then
         echo "> Removing "$MountLocation
