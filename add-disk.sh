@@ -56,7 +56,6 @@ if [ $(whoami) = "root" ]; then # If Root
       chown --reference=$MountLocation"-temp" $MountLocation
       chmod --reference=$MountLocation"-temp" $MountLocation
       mount -o discard,defaults /dev/disk/by-id/google-$DiskName $MountLocation
-      chmod a+w $MountLocation
       echo "> Unmouting temporary location"
       umount -l $TempLocation
       rm -rf $TempLocation
