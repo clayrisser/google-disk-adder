@@ -53,9 +53,9 @@ if [ $(whoami) = "root" ]; then # If Root
       mv -f $MountLocation $MountLocation"-temp"
       echo "> Mounting to "$MountLocation
       mkdir $MountLocation
+      mount -o discard,defaults /dev/disk/by-id/google-$DiskName $MountLocation
       chown --reference=$MountLocation"-temp" $MountLocation
       chmod --reference=$MountLocation"-temp" $MountLocation
-      mount -o discard,defaults /dev/disk/by-id/google-$DiskName $MountLocation
       echo "> Unmouting temporary location"
       umount -l $TempLocation
       rm -rf $TempLocation
