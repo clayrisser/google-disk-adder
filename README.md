@@ -1,6 +1,8 @@
 # Google Disk Adder
 Adds a Google Cloud Disk to a Google Compute Engine.
 
+![](assets/google-disk-adder.png)
+
 Example use cases for Google Disk Adder:
 
 1. Create a separate /home partition.
